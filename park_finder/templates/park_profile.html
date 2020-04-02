@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Park Profile</title>
+</head>
+<body class="dk-green">
+    <!-- top bar -->
+    <nav class="navbar lt-brown dk-green-font navbar-expand-sm justify-content-between">
+        <span class="h1">Welcome to {{park.name}}!</span>
+        <div>
+            <a href="/logout" class="mr-2 btn-md btn-outline-light dk-green-font font-weight-bold">Logout</a>
+            <a href="/dashboard" class="btn-light btn-lg">Home</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="column">
+            <h1 class="d-flex display-2 font-weight-bold lt-green-font row">{{park.name}}</h1>
+        </div>
+        <div class="column">
+            <div class="text-center d-inline-flex align-items-center">
+                <div>
+                    <a href="{{park.website_url}}" class="btn yellow font-weight-bold dkdk-brown-font btn-lg py-4 my-3 mr-4">click here to check the park's <br> website for recent updates</a>
+                    <a href="{{park.trail_map_url}}" class="btn-lg py-4 mb-3 btn dkdk-brown yellow-font font-weight-bold align-bottom">click here to check the <br>park's trail map</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="h4 lt-green-font row">Here's what {{park.name}} has to offer its visitors:</p>
+    </div>
+    <div class="container d-flex justify-content-between">
+        <div class="d-flex flex-sm-column my-3 dk-brown-font align-items-center">
+            <div class="d-inline-flex">
+                <div class="column mr-4">
+                    <p class="h5 lt-green-font font-weight-bold">{{park.name}} has:</p>
+                    <div class="bin-border px-4 pt-2 lt-green dk-brown-font font-weight-bold">
+                        <ul><!--has list-->
+                            {% if park.allows_pets %}
+                            <li>it's pet friendly</li>
+                            {% endif %}
+                            {% if park.limited_access %}
+                            <li>it's always open to the public</li>
+                            {% endif %}
+                            <li>it can be {{park.busy}}</li>
+                            {% if park.has_shade %}
+                            <li>it has shade</li>
+                            {% endif %}
+                            {% if park.has_water %}
+                            <li>it has drinking water</li>
+                            {% endif %}
+                            {% if park.has_bathrooms %}
+                            <li>it has public bathrooms</li>
+                            {% endif %}
+                            {% if park.is_accessible %}
+                            <li>it is accessible</li>
+                            {% endif %}
+                            {% if park.is_kid_friendly %}
+                            <li>it's kid friendly</li>
+                            {% endif %}
+                            {% if park.has_playground %}
+                            <li>it has a playground</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="column">
+                    <p class="h5 lt-green-font font-weight-bold">but....</p>
+                    <div class="bin-border px-4 pt-2 dk-brown lt-green-font font-weight-bold">
+                        <ul><!--has not list-->
+                            {% if not park.allows_pets %}
+                            <li>it's not pet friendly</li>
+                            {% endif %}
+                            {% if not park.limited_access %}
+                            <li>it's not open to the general public all the time</li>
+                            {% endif %} 
+                            {% if not park.has_shade %}
+                            <li>it doesn't have much shade</li>
+                            {% endif %}
+                            {% if not park.has_water %}
+                            <li>it does not have drinking water</li>
+                            {% endif %}
+                            {% if not park.has_bathrooms %}
+                            <li>it doesn't have public bathrooms</li>
+                            {% endif %}
+                            {% if not park.is_accessible %}
+                            <li>it's not accessible</li>
+                            {% endif %}
+                            {% if not park.is_kid_friendly %}
+                            <li>this park is not for the faint of heart-- maybe leave the little ones home</li>
+                            {% endif %}
+                            {% if not park.has_playground %}
+                            <li>it doesn't have a playground</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div> <!--end of boolean attributes-->
+                
+            <div class="d-inline-flex justify-content-around">
+                <div class="column mr-4">
+                    <p class="h5 lt-green-font font-weight-bold">it allows the following activities:</p>
+                    <div class="bin-border px-4 pt-2 lt-brown dk-green-font font-weight-bold">
+                        <ul>
+                        {% for activity in activities %}
+                            <li>{{activity}}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="column">
+                    <p class="h5 lt-green-font font-weight-bold">and has the following natural features:</p>
+                    <div class="bin-border px-4 pt-2 lt-brown dk-green-font font-weight-bold">
+                        <ul>
+                        {% for feature in features %}
+                            <li>{{feature}}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div> <!-- end park activities & features-->
+        </div>
+        
+    </div> <!--end of park info & park site links-->
+
+    <div class="container lt-blue rounded edges py-2">
+        <h5>{{visits_count}} other users have explored {{park.name}}. Here's what they had to say:</h5>
+        <ul>
+            {% for visit in visits %}
+            <li class="h4 no-bullet yellow-font font-weight-bold"> <a class="md-green-font" href="/user_profile/{{visit.user_id}}"><u>{{visit.user.first_name}}</u></a> visited on {{visit.formatted_date}}</li>
+            <li class="h5 no-bullet dk-green-font font-weight-bold">Rating: {{visit.rating}}/5</li>
+            <li class="h5 no-bullet dkdk-brown-font">Their hiking group consisted of: 
+                    {{visit.hg_formatted.0}} adults, 
+                    {{visit.hg_formatted.1}} kids, 
+                    {{visit.hg_formatted.2}} people with disabilities, and 
+                    {{visit.hg_formatted.3}} pets</li>
+            <li class="h6 no-bullet dk-brown-font font-weight-bold">Notes: {{visit.public_notes}}</li>
+            <!-- <li>pics visit.??</li> -->
+            <hr class="font-weight-bold dk-green">
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="container mt-4 mb-8 d-flex justify-content-around">
+        {% if list_action == "add_to_list" %}
+            <form action="/add_visit_from_park_profile/{{park.id}}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg py-4 mb-3 dkdk-brown lt-blue-font font-weight-bold">Add this to my <br> list of places to visit</button>
+            </form>
+        {% endif %}
+        {% if list_action == "remove_from_list" %}
+            <form action="/remove_park_from_list/{{park.id}}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg py-4 mb-3 lt-blue dkdk-brown-font font-weight-bold">Remove this from <br> list of places to visit</button>
+            </form>
+        {% endif %}
+        {% if "memory_log" in list_action %}
+            <a href="/memory_log/{{list_action.1}}" class="btn btn-lg dkdk-brown yellow-font font-weight-bold">View most <br> recent visit</a>
+        {% endif %}
+
+        <a href="/add_trail_report/{{park.id}}" class="btn btn-lg yellow dkdk-brown-font font-weight-bold ">Add a trail report <br> to my log</a>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Coding+Dojo+Orange+County&destination={{park.latitude}},-{{park.longitue}}&travelmode=driving" class="btn btn-light btn-lg">let's go! <br>(get directions)</a>
+    </div>
+    <!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvnIiX3yTZGKC-6tHN0cvhiVugCJn3tMM&callback=initMap">
+    </script> -->
+</body>
+</html>

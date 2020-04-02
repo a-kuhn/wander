@@ -1,0 +1,151 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.map{
+    height: 400px;
+    width: 100%;
+}
+
+/* COLOR SCHEME */
+.navbar-font-size{
+    font-size: 3em;
+}
+.hg-font-size{
+    font-size: 2.5em;
+}
+.lt-font{
+    color: antiquewhite;
+}
+.lt-background{
+    background-color: antiquewhite;
+}
+.md-green-font{
+    color: #3C887E;
+}
+.dk-brown-font{
+    color: #A17C6B;
+}
+.dkdk-brown-font{
+    color: #4A392F;
+}
+.dkdk-brown{
+    background-color: #4A392F;
+}
+.lt-brown-font{
+    color: #CEB5A7;
+}
+.dk-green-font{
+    color: #5B7B7A;
+}
+.lt-green-font{
+    color: #E0F2E9;
+}
+.yellow-font{
+    color: #E8C547;
+}
+.dk-blue-font{
+    color: #81DDE5;
+}
+.lt-blue-font{
+    color: #C0EEF2;
+}
+.dk-brown{
+    background-color: #A17C6B;
+}
+.lt-brown{
+    background-color: #CEB5A7;
+}
+.dk-green{
+    background-color: #5B7B7A;
+}
+.md-green{
+    background-color: #3C887E;
+}
+.lt-green{
+    background-color: #E0F2E9;
+}
+.yellow{
+    background-color: #E8C547;
+}
+.dk-blue{
+    background-color: #81DDE5;
+}
+.lt-blue{
+    background-color: #C0EEF2;
+}
+
+
+/* DASHBOARD */
+.profile-pic{
+    width: 100px;
+    height: 100px;
+}
+
+
+/* MISCELLANEOUS */
+.block{
+    display: block;
+}
+
+.red-font{
+    color: rgb(203,17,17);
+}
+
+.button-shadow{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: .8em;
+    padding: 5px;
+    color: black;
+    border: 1px solid black;
+    box-shadow: 3px 2px 0 black;}
+
+.lets-go-button{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: .8em;
+    padding:5px;
+    color: black;
+    background-color: palegreen;
+    border: 1px solid black;
+    border-radius: 0;
+    box-shadow: 3px 2px 0 black;
+}
+
+#stats-button{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: black;
+    font-size: .8em;
+    padding: 5px;
+    border: 1px solid black;
+    box-shadow: 3px 2px 0 black;
+    background-color: rgb(164,148,204);
+}
+
+.div-border{
+    border: 3px solid #4A392F;
+    border-radius: 25px;
+}
+.bin-border{
+    border: 3px solid #4A392F;
+    border-radius: 10px;
+}
+.btn-border{
+    border: 3px solid #4A392F;
+}
+.no-bullet{
+    list-style-type: none;
+}
+.d-inline{
+    display: inline;
+}
+.rounded-edges{
+    border-radius: 10px;
+}
+.d-block{
+    display: block;
+}

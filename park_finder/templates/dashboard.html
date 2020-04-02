@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Dashboard</title>
+</head>
+<body class="lt-background">
+    <!-- top bar -->
+    <nav class="navbar dk-green lt-font navbar-expand-sm d-flex">
+        <img width="100" height="100" class="img-circle" src="/static/css/profile_pic.jpg" alt="profile_pic">
+        <span class="ml-2 navbar-brand justify-content-start navbar-font-size">Hey there, {{user.first_name}}!</span>
+        <a href="/logout" class="ml-auto btn-md btn-outline-light justify-content-end">Logout</a>    
+    </nav>
+
+    <div class="d-flex flex-row">
+        <div class="container d-flex flex-sm-column my-3 dk-brown-font align-items-center">
+            <h4 class="hg-font-size">My Hiking Group:</h4>
+            <p class="h4 text-center">2 adult(s)</p>
+            <p class="h4 text-center">0 kid(s)</p>
+            <p class="h4 text-center">0 people with disabilities</p>
+            <p class="h4 text-center">2 dog(s)</p>
+        </div>
+        <div class="container d-flex flex-sm-column align-items-center">
+            <div class="text-center">
+                <div>   
+                    <a href="/add_park" class="btn dk-brown lt-green-font btn-lg py-4 my-3">Add a New Park</a>
+                </div> 
+                <div>
+                    <a href="/park_search" class="btn btn-lg dk-green lt-green-font p-4 mb-3">Plan your <br>next adventure!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-around">
+        <div class="div-border h3 my-2 p-4 lt-brown-font dk-green">
+            <p>Places I want to visit:</p>
+            <ul>{% for place in places_to_visit %}
+                <li class="h5 no-bullet d-flex">
+                    <a class="lt-blue-font mr-auto" href="/park_profile/{{place.park_id}}">
+                        <u>{{place.park.name}}</u>
+                    </a>  
+                    <a href="/remove_park_from_list/{{place.park_id}}" class="btn btn-sm yellow dkdk-brown-font mx-2">remove</a>
+                    <a href="/add_trail_report/{{place.park_id}}" class="mx-2 btn btn-sm yellow-font dkdk-brown">add trail report</a>
+                </li>
+
+            {% endfor %}</ul>
+        </div>
+        <div class="div-border h3 my-2 p-4 md-green-font lt-brown">
+            <p>Places I have visited:</p>
+            <ul>
+            {% for place in visited_places %}
+                <li class="h5 no-bullet"><a class="dk-green-font" href="/memory_log/{{place.id}}"><u>{{place.park.name}}</u></a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

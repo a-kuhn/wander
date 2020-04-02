@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Search Results</title>
+</head>
+<body class="lt-brown">
+    <!-- top bar -->
+    <nav class="navbar dk-brown lt-green-font navbar-expand-sm justify-content-between">
+        <span class="h1 justify-content-start">Let's find your next adventure!</span>
+        <div>
+            <a href="/logout" class="mr-2 btn-md btn-outline-light">Logout</a>
+            <a href="/dashboard" class="btn-light btn-lg">Home</a>
+        </div>
+    </nav>
+
+    
+    <div class="container">
+        <p class="h1 mt-2 dk-green-font font-weight-bold">{{message}}</p>
+        <hr class="font-weight-bold dk-green">
+            {% for item in activities_features_list %}
+            <div class="row d-flex">
+                <p> <a class="md-green-font h3 font-weight-bold" href="/park_profile/{{item.0.id}}"><u>{{item.0.name}}</u></a></p>
+                
+            </div>
+                    <p class="h4 dk-brown-font">In regards to your planned activities:</p>
+                        <div class="d-flex row justify-content-between mx-2">
+                            <div class="column">
+                                <p class="h5 dk-green-font font-weight-bold">{{item.0.name}} permits the following:</p>
+                                <div class="bin-border p-2 lt-green dk-brown-font font-weight-bold">
+                                    {% for activity in item.1.a_match %}
+                                    <ul class="no-bullet"><li>{{activity}}</li></ul>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                            <div class="column">
+                                <p class="h5 dk-green-font font-weight-bold">but not the following:</p>
+                                <div class="bin-border p-2 dk-brown lt-green-font font-weight-bold">
+                                    {% for activity in item.1.a_no_match %}
+                                    <ul class="no-bullet"><li>{{activity}}</li></ul>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    <p class="h4 mt-5 dk-brown-font">As for the features you'd like to see:</p>
+                        <div class="d-flex row justify-content-between mx-2">
+                            <div class="column">
+                                <p class="h5 dk-green-font font-weight-bold">{{item.0.name}} has the following:</p>
+                                <div class="bin-border p-2 lt-green dk-brown-font font-weight-bold">
+                                    {% for activity in item.1.f_match %}
+                                    <ul class="no-bullet"><li>{{activity}}</li></ul>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                            <div class="column">
+                                <p class="h5 dk-green-font font-weight-bold">but not the following:</p>
+                                <div class="bin-border p-2 dk-brown lt-green-font font-weight-bold">
+                                    {% for activity in item.1.f_no_match %}
+                                    <ul class="no-bullet"><li>{{activity}}</li></ul>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    <!-- <li>3 most recent user pics</li> -->
+                    <!-- <li>2 most recent trail reports</li> -->
+            <hr class="font-weight-bold dk-green">
+            {% endfor %}
+    </div>
+
+    <!-- <p>need an add to visit list feature action/href = /add_visit_from_results/park.id</p> -->
+</body>
+</html>
